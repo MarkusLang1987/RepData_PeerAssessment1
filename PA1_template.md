@@ -82,6 +82,22 @@ p + geom_line() + labs(x = "Time", y = "Avg Steps") + scale_x_datetime(date_labe
 
 ![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
+With the averaged steps in the **inta** dataset, we can check which 5-minute interval has the largest count: 
+
+
+```r
+inta[which(inta$avg == max(inta$avg)), 1]
+```
+
+```
+## # A tibble: 1 × 1
+##   interval
+##      <int>
+## 1      835
+```
+
+This corresponds to the 5-minute interval beginning at 8:35 which appears supported by the time-series graph above. 
+
 ## Imputing missing values
 
 There are a couple of quick ways to obtain the number of **NA** values in the dataset. My favorite is just using the **summary** function:
@@ -122,7 +138,7 @@ p <- ggplot(totalb, aes(total))
 p + geom_histogram(binwidth = 600) + labs(x = "Number of Steps", y = "Days")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 And the by-day mean and median values can be recomputed to show the impact of imputed values:
 
@@ -170,6 +186,6 @@ p <- p + geom_line() + labs(x = "Time", y = "Avg Steps") + scale_x_datetime(date
 p + facet_wrap(~day_type, nrow = 2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 We can see that weekdays tend to have a higher early mode, but subsequent modes tend to fall below the corresponding intervals of the weekends.

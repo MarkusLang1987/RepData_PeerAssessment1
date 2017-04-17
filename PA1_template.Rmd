@@ -69,6 +69,14 @@ p <- ggplot(inta, aes(dttm, avg))
 p + geom_line() + labs(x = "Time", y = "Avg Steps") + scale_x_datetime(date_labels = "%H:%M")
 ```
 
+With the averaged steps in the **inta** dataset, we can check which 5-minute interval has the largest count: 
+
+```{r}
+inta[which(inta$avg == max(inta$avg)), 1]
+```
+
+This corresponds to the 5-minute interval beginning at 8:35 which appears supported by the time-series graph above. 
+
 ## Imputing missing values
 
 There are a couple of quick ways to obtain the number of **NA** values in the dataset. My favorite is just using the **summary** function:
